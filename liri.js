@@ -25,29 +25,21 @@ client.get('search/tweets', {q: 'science', count: 20}, function(error, data, res
         }
     });
 
-// Spotity
-// fs.readFile('./random.text'),
-// spotify
-//   .search(
-//       { type:'song',
-//         query: 'I want it that way',
-//         artist: 'artist', 
-//         // songName: 'All the Small Things',
-//         songLink: 'songLink',
-//         album: 'album'
-//      }
+
 spotify
-.request('node-spotify-api')
+  .search(
+      { type:'track',
+        query: 'All the small things',
+        limit: 1
+     })
 .then(function(data) {
-  console.log(data); 
+  console.log(data.tracks); 
 })
 .catch(function(err) {
   console.error('Error occurred: ' + err); 
 });
      
-//   .then(function(response) {
-//     console.log(response);
-//   })
+//  
 //     
 // Request
 
