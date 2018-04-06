@@ -52,9 +52,20 @@ spotify
 // Request for imDB
 
 request('http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy', function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred
+  var movie= JSON.parse(body); 
+  
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
+  console.log("The movie's rating is: " + movie.imdbRating);
+  console.log('Title of the movie: ' + movie.Title);
+  console.log('Year the movie came out: ' + movie.Year);
+  console.log('Country where the movie was produced: ' + movie.Country);
+  console.log('Language of the movie: ' + movie.Language);
+  console.log('Plot of the movie: ' + movie.Plot);
+  console.log('Actors in the movie: ' + movie.Actors);
+  // use .find to parse out rotten tomatoes ratings from the tree ratings
+  console.log('Rotten Tomatoes Rating of the movie: ' + movie.Ratings.find(function(e){
+    return e.Source == "Rotten Tomatoes";
+  }).Value);
 });
 
 
