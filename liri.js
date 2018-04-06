@@ -30,17 +30,32 @@ spotify
   .search(
       { type:'track',
         query: 'All the small things',
-        limit: 1
+        limit:1
      })
 .then(function(data) {
-  console.log(data.tracks); 
+  // parse data from package
+  var track = data.tracks.items[0]; 
+  console.log(track.album.name);
+  console.log(track.name);
+  // use map to call the element from the array and return only artist's name
+  console.log(track.artists.map(function(e){
+    return e.name;
+    // for multiple artists use .join
+  }).join(','));
+  console.log(track.preview_url);
 })
 .catch(function(err) {
   console.error('Error occurred: ' + err); 
+  console.log(JSON.stringify(data, null, 2));
+
+});    
+// Request for imDB
+
+request('http://www.omdbapi.com/?t=remember+the+titans&y=&plot=short&apikey=trilogy', function (error, response, body) {
+  console.log('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log("The movie's rating is: " + JSON.parse(body).imdbRating);
 });
-     
-//  
-//     
-// Request
+
 
 
